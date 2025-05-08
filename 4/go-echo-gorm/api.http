@@ -1,0 +1,44 @@
+### Dodaj kategorię
+POST http://localhost:8081/categories
+Content-Type: application/json
+
+{
+  "name": "Elektronika"
+}
+
+###
+
+### Dodaj produkt (do kategorii o ID 1)
+POST http://localhost:8081/products
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "price": 4200,
+  "categoryID": 1
+}
+
+###
+
+### Pobierz wszystkie produkty
+GET http://localhost:8081/products
+
+###
+
+### Filtrowanie produktów (kategoria = 1, min. cena = 1000)
+GET http://localhost:8081/products?category=1&minPrice=1000
+
+###
+
+### Dodaj koszyk (użytkownik o ID 1)
+POST http://localhost:8081/carts
+Content-Type: application/json
+
+{
+  "userID": 1
+}
+
+###
+
+### Pobierz wszystkie kategorie
+GET http://localhost:8081/categories
