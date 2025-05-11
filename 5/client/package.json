@@ -2,8 +2,7 @@
     "name": "client",
     "version": "1.0.0",
     "scripts": {
-        "dev": "vite",
-        "prepare": "husky install"
+        "dev": "vite"
     },
     "dependencies": {
         "axios": "^1.6.0",
