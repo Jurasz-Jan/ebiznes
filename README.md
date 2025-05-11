@@ -14,6 +14,31 @@ przez CMD oraz gradle ✅
 📦 Kod: folder 1/
 
 # 2: TODO
+✅ Zadanie 2 – Play Framework Scala 3 CRUD + Docker
+
+✅ 3.0 Kontroler CRUD dla Produktów
+👉 Link do commita 1
+📁 Plik: app/controllers/ProductController.scala, app/models/Product.scala
+
+✅ 3.5 Endpointy CRUD produktów działające na liście
+👉 Link do commita 2
+📁 Plik: conf/routes, app/controllers/ProductController.scala
+
+✅ 4.0 Kontrolery CRUD dla Kategorii oraz Koszyka
+👉 Link do commita 3
+📁 Plik:
+
+Kategorie: app/controllers/CategoryController.scala, app/models/Category.scala
+
+Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
+
+✅ 4.5 Dockerfile + Uruchomienie aplikacji przez ngrok
+👉 Link do commita 4
+📁 Plik: Dockerfile
+
+✅ 5.0 Konfiguracja CORS dla dwóch hostów
+👉 Link do commita 5
+📁 Plik: conf/application.conf
 
 📦 Kod: folder 2/
 
