@@ -13,7 +13,7 @@ przez CMD oraz gradle ✅
 
 📦 Kod: folder 1/
 
-# 2: TODO
+# 2 Scala ✅ 
 ✅ Zadanie 2 – Play Framework Scala 3 CRUD + Docker
 
 ✅ 3.0 Kontroler CRUD dla Produktów
