@@ -1,16 +1,14 @@
 import React, { createContext, useContext, useState } from 'react'
 
-interface CartContextType {
-  cart: any[]
-  addToCart: (item: any) => void 
-}
-
-const CartContext = createContext<CartContextType | null>(null)
+const CartContext = createContext<{
+  cart: unknown[]
+  addToCart: (item: unknown) => void
+} | null>(null)
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [cart, setCart] = useState<any[]>([])
+  const [cart, setCart] = useState<unknown[]>([])
 
-  const addToCart = (item: any) => setCart(prev => [...prev, item])
+  const addToCart = (item: unknown) => setCart(prev => [...prev, item])
 
   return (
     <CartContext.Provider value={{ cart, addToCart }}>

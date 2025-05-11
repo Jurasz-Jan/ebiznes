@@ -9,7 +9,7 @@ function Payments() {
     axios.post('http://localhost:3000/payments', { cart }, {
       headers: { 'Access-Control-Allow-Origin': '*' }
     }).then(() => alert('Płatność wysłana!'))
-      .catch(err => alert('Błąd przy płatności'))
+      .catch(err => console.error('Error sending payment:', err))
   }
 
   return (
