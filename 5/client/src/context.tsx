@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 interface CartContextType {
   cart: any[]
-  addToCart: (item: any) => void
+  addToCart: (item: any) => void 
 }
 
 const CartContext = createContext<CartContextType | null>(null)
