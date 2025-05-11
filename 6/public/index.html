@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo App</title>
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: 40px auto; }
+    .todo-list li.completed label { text-decoration: line-through; color: gray; }
+  </style>
+</head>
+<body>
+  <h1>Todo</h1>
+  <input class="new-todo" placeholder="Co chcesz zrobić?" autofocus />
+  <ul class="todo-list"></ul>
+
+  <script>
+    const input = document.querySelector('.new-todo');
+    const list = document.querySelector('.todo-list');
+
+    const render = async () => {
+      const res = await fetch('/api/todos');
+      const todos = await res.json();
+      list.innerHTML = '';
+      todos.forEach(todo => {
+        const li = document.createElement('li');
+        li.className = todo.completed ? 'completed' : '';
+        li.innerHTML = `
+          <input type="checkbox" class="toggle" ${todo.completed ? 'checked' : ''} />
+          <label>${todo.title}</label>
+          <button class="destroy">×</button>
+        `;
+        li.querySelector('.toggle').addEventListener('change', async () => {
+          await fetch('/api/todos/' + todo.id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ completed: !todo.completed, title: todo.title })
+          });
+          render();
+        });
+        li.querySelector('.destroy').addEventListener('click', async () => {
+          await fetch('/api/todos/' + todo.id, { method: 'DELETE' });
+          render();
+        });
+        list.appendChild(li);
+      });
+    };
+
+    input.addEventListener('keydown', async e => {
+      if (e.key === 'Enter') {
+        await fetch('/api/todos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: input.value })
+        });
+        input.value = '';
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

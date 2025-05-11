@@ -1,0 +1,22 @@
+{
+    "name": "todolist-tests",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "cypress:open": "cypress open",
+        "cypress:run": "cypress run",
+        "test:unit": "mocha tests/unit",
+        "browserstack:run": "browserstack-cypress run --sync"
+    },
+    "devDependencies": {
+        "browserstack-cypress-cli": "^1.8.0",
+        "chai": "^4.3.7",
+        "cypress": "^12.10.0",
+        "mocha": "^10.2.0"
+    },
+    "dependencies": {
+        "body-parser": "^2.2.0",
+        "express": "^5.1.0",
+        "todolist-tests": "file:"
+    }
+}
