@@ -140,3 +140,56 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 📦 Kod: folder 6/
 
+✅ Zadanie 7 – SonarCloud: Jakość i bezpieczeństwo
+✅ 3.0 Dodanie litera (SonarScan) do hooków gita (pre-push)
+👉 Link do commita 1
+📁 Plik: .husky/pre-push, server/sonar-project.properties
+
+✅ 3.5 Wyeliminowanie wszystkich bugów w kodzie serwera
+👉 Link do commita 2
+📁 Plik: server/index.js, server/index.test.js
+
+✅ 4.0 Wyeliminowanie wszystkich zapaszków (code smells) w serwerze
+👉 Link do commita 3
+📁 Plik: server/index.js
+
+✅ 4.5 Wyeliminowanie wszystkich podatności i błędów bezpieczeństwa w serwerze
+👉 Link do commita 4
+📁 Plik: server/index.js, server/package.json
+
+✅ 5.0 Wyeliminowanie wszystkich błędów i zapaszków w kliencie
+👉 Link do commita 5
+📁 Plik: client/src/App.js, client/src/App.test.js
+
+📦 Kod: folder 7/project/ (client/, server/)
+
+
+
+✅ Zadanie 8 – Autoryzacja i OAuth2
+✅ 3.0 Logowanie przez aplikację serwerową (bez OAuth2)
+👉 Link do commita 1
+📁 Plik: server/index.js
+
+✅ 3.5 Rejestracja przez aplikację serwerową (bez OAuth2)
+👉 Link do commita 2
+📁 Plik: server/index.js
+
+❌ 4.0 Logowanie via Google OAuth2
+❌ 4.5 Logowanie via Facebook lub Github OAuth2
+❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
+
+✅ Zadanie 8 – Autoryzacja i OAuth2
+✅ 3.0 Logowanie przez aplikację serwerową (bez OAuth2)
+👉 Link do commita 1
+📁 Plik: server/index.js
+
+✅ 3.5 Rejestracja przez aplikację serwerową (bez OAuth2)
+👉 Link do commita 2
+📁 Plik: server/index.js
+
+❌ 4.0 Logowanie via Google OAuth2
+❌ 4.5 Logowanie via Facebook lub Github OAuth2
+❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
+
+
+📦 Kod: folder 8/project/ (client/, server/)

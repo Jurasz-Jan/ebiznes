@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running SonarCloud analysis before push..."
+
+# Upewnij się, że SONAR_TOKEN jest ustawiony
+if [ -z "$SONAR_TOKEN" ]; then
+  echo "❌ SONAR_TOKEN is not set. Aborting push."
+  exit 1
+fi
+
+npx @sonar/scan -Dsonar.token=$SONAR_TOKEN
