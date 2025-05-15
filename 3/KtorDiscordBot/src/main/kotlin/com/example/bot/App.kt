@@ -17,7 +17,7 @@ fun main() {
         startDiscordBot()
     }
 
-    embeddedServer(Netty, port = 8080, module = Application::module).start(wait = true)
+    embeddedServer(Netty, port = 8081, module = Application::module).start(wait = true)
 }
 
 
