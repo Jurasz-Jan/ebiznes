@@ -140,7 +140,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 📦 Kod: folder 6/
 
-✅ Zadanie 7 – SonarCloud: Jakość i bezpieczeństwo
+# ✅ Zadanie 7 – SonarCloud: Jakość i bezpieczeństwo
 ✅ 3.0 Dodanie litera (SonarScan) do hooków gita (pre-push)
 👉 Link do commita 1
 📁 Plik: .husky/pre-push, server/sonar-project.properties
@@ -165,7 +165,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 
 
-✅ Zadanie 8 – Autoryzacja i OAuth2
+# ✅ Zadanie 8 – Autoryzacja i OAuth2
 ✅ 3.0 Logowanie przez aplikację serwerową (bez OAuth2)
 👉 Link do commita 1
 📁 Plik: server/index.js
