@@ -1,0 +1,94 @@
+### GET all products
+GET http://localhost:9000/products
+Content-Type: application/json
+
+### POST new product
+POST http://localhost:9000/products
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Laptop",
+    "price": 2999.99
+}
+
+### GET product by id
+GET http://localhost:9000/products/1
+Content-Type: application/json
+
+### PUT update product
+PUT http://localhost:9000/products/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Laptop",
+    "price": 2999.99
+}
+
+### DELETE product by id
+DELETE http://localhost:9000/products/1
+Content-Type: application/json
+
+### GET all categories
+GET http://localhost:9000/categories
+Content-Type: application/json
+
+### POST new category
+POST http://localhost:9000/categories
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Edlektronika",
+    "description": "Urządzenia elektroniczne"
+}
+
+### GET category by id
+GET http://localhost:9000/categories/1
+Content-Type: application/json
+
+### PUT update category
+PUT http://localhost:9000/categories/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updateddddddddddddddddddd Elektronika",
+    "description": "Urządzenia elektroniczne"
+
+}
+
+### DELETE category by id
+DELETE http://localhost:9000/categories/3
+Content-Type: application/json
+
+### GET all carts
+GET http://localhost:9000/carts
+Content-Type: application/json
+
+### POST new cart
+POST http://localhost:9000/carts
+Content-Type: application/json
+
+{
+  "id": 3,
+  "productIds": [1]
+}
+
+### GET cart by id
+GET http://localhost:9000/carts/1
+Content-Type: application/json
+
+### PUT update cart
+PUT http://localhost:9000/carts/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "productIds": [1,2]
+}
+
+### DELETE cart by id
+DELETE http://localhost:9000/carts/3
+Content-Type: application/json
