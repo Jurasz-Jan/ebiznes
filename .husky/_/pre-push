@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+echo "🔍 Running SonarCloud analysis before push..."
+
+
+echo "🧪 Analyzing server..."
+cd ../7/project/server
+npx @sonar/scan -Dsonar.token=$SONAR_TOKEN || exit 1
+echo "🧪 WORKS."
+
+echo "🧪 Analyzing client..."
+cd ../7/project/client
+npx @sonar/scan -Dsonar.token=$SONAR_TOKEN || exit 1
