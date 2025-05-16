@@ -1,5 +1,3 @@
-README IN PROGRESS
-Muszę jeszcze dodać demo itd.
 
 
 # 1 Docker ✅
