@@ -1,4 +1,5 @@
-
+#### Notka
+Z racji dużego obłożenia czasowego na razie są tu wszystkie zrobione zadania, ale brakuje linków do commitów i wzszystkich nagranych dem. Na dniach one będą
 
 # 1 Docker ✅
 3.0 obraz ubuntu z Pythonem w wersji 3.10 ✅
