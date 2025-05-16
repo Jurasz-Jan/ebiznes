@@ -1,5 +1,5 @@
 #### Notka
-Z racji dużego obłożenia czasowego na razie są tu wszystkie zrobione zadania, ale brakuje linków do commitów i wzszystkich nagranych dem. Na dniach one będą
+Z racji dużego obłożenia czasowego na razie są tu wszystkie zrobione zadania, ale brakuje linków do commitów i wszystkich nagranych dem. Bardzo przepraszam i zdaję sobie sprawę,jakie to jest problematyczne. Na dniach te braki będą nadrobione
 
 # 1 Docker ✅
 3.0 obraz ubuntu z Pythonem w wersji 3.10 ✅
