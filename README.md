@@ -177,18 +177,6 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 ❌ 4.5 Logowanie via Facebook lub Github OAuth2
 ❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
 
-✅ Zadanie 8 – Autoryzacja i OAuth2
-✅ 3.0 Logowanie przez aplikację serwerową (bez OAuth2)
-👉 Link do commita 1
-📁 Plik: server/index.js
-
-✅ 3.5 Rejestracja przez aplikację serwerową (bez OAuth2)
-👉 Link do commita 2
-📁 Plik: server/index.js
-
-❌ 4.0 Logowanie via Google OAuth2
-❌ 4.5 Logowanie via Facebook lub Github OAuth2
-❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
 
 
 📦 Kod: folder 8/project/ (client/, server/)
