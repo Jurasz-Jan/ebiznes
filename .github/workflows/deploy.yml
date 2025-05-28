@@ -1,0 +1,34 @@
+name: Build frontend and backend for Render
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build frontend Docker image
+        run: docker build -t my-frontend ./10/frontend
+
+      - name: Build backend Docker image
+        run: docker build -t my-backend ./10/backend
+
+      - name: Send success email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "✅ Build completed"
+          to: twojemail@example.com
+          from: GitHub Actions <twojemail@example.com>
+          body: |
+            Aplikacja została pomyślnie zbudowana.
+            Frontend: ./10/frontend
+            Backend: ./10/backend
