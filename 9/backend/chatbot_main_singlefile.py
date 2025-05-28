@@ -195,17 +195,7 @@ async def chat(request: Request):
     if not message:
         raise HTTPException(status_code=400, detail={"response": "Please provide a message."})
 
-    # Check if it's the first message in the session to provide an opening
-    is_first_message = len(chatbot_instance.get_chat_history(session_id)) == 0
-    if is_first_message:
-        # Provide a random opening if it's the very first message
-        # This will be overridden if the topic is out of scope.
-        initial_response = random.choice(chatbot_instance.conversation_openings)
-        # Add to history to avoid repeating for the same first message
-        chatbot_instance.add_to_chat_history(session_id, "Bot", initial_response)
-        # You might want to return this first, then process the user's actual query
-        # For simplicity, we'll process the query and add the opening to history if relevant
-        # or return it directly if the topic is out of scope.
+   
 
     # Check for farewell intent
     if chatbot_instance.is_farewell(message):

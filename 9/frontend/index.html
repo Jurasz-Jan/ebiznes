@@ -108,6 +108,15 @@
             sessionStorage.setItem('chatbot_session_id', sessionId);
         }
 
+        // List of conversation openings for the frontend
+        const conversationOpenings = [
+            "Hello! How can I help you with your shopping today?",
+            "Hi there! Welcome to our store. What are you looking for?",
+            "Greetings! I'm here to assist you with any questions about our clothes or shopping. How can I help?",
+            "Hey! Glad you're here. How can I assist you with your fashion needs?",
+            "Welcome! Ask me anything about our products or your order. What's on your mind?"
+        ];
+
         // Function to add messages to the chat history display
         function addMessageToChat(sender, message) {
             const chatHistory = document.getElementById('chat-history');
@@ -186,7 +195,9 @@
 
                     // Clear chat display
                     document.getElementById('chat-history').innerHTML = '';
-                    addMessageToChat('bot', 'Hello! Starting a new conversation. How can I help you with your shopping?');
+                    // Display a random welcome message for the new conversation
+                    const randomOpening = conversationOpenings[Math.floor(Math.random() * conversationOpenings.length)];
+                    addMessageToChat('bot', randomOpening);
 
                 } catch (error) {
                     console.error("Error resetting conversation:", error);
@@ -198,9 +209,10 @@
         // Welcome message on first page load
         document.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('chat-history').children.length === 0) {
-                addMessageToChat('bot', 'Hello! How can I assist you with your shopping today?');
+                const randomOpening = conversationOpenings[Math.floor(Math.random() * conversationOpenings.length)];
+                addMessageToChat('bot', randomOpening);
             }
         });
     </script>
 </body>
-</html> 
+</html>
