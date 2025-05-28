@@ -1,23 +1,206 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>ChatBot</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping ChatBot AI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 70vh; /* Height of the chat container */
+        }
+        .chat-history {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto; /* Scrollable history */
+            border-bottom: 1px solid #eee;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+        .message.user {
+            background-color: #dcf8c6;
+            align-self: flex-end; /* Align to the right */
+            margin-left: auto; /* Align to the right */
+            text-align: right;
+        }
+        .message.bot {
+            background-color: #e2e2e2;
+            align-self: flex-start; /* Align to the left */
+            margin-right: auto; /* Align to the left */
+            text-align: left;
+        }
+        .input-area {
+            display: flex;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            gap: 10px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .header-controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-controls button {
+            background-color: #6c757d;
+            margin-left: 10px;
+        }
+        .header-controls button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
 <body>
-  <h1>Sklepowy ChatBot</h1>
-  <input id="user-input" placeholder="Zadaj pytanie..." />
-  <button onclick="send()">Wyślij</button>
-  <div id="chat"></div>
+    <div class="header-controls">
+        <h1>Shopping ChatBot AI</h1>
+        <button onclick="startNewConversation()">New Conversation</button>
+    </div>
 
-  <script>
-    async function send() {
-      const msg = document.getElementById('user-input').value;
-      const res = await fetch("http://localhost:8000/chat", {
-        method: "POST",
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({message: msg})
-      });
-      const data = await res.json();
-      document.getElementById("chat").innerHTML += `<p><b>Ty:</b> ${msg}</p><p><b>Bot:</b> ${data.response}</p>`;
-    }
-  </script>
+    <div class="chat-container">
+        <div id="chat-history" class="chat-history">
+            </div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Ask a question..." onkeydown="handleKeyPress(event)" />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Generate a unique session ID or retrieve an existing one
+        let sessionId = sessionStorage.getItem('chatbot_session_id');
+        if (!sessionId) {
+            sessionId = 'session_' + Date.now() + Math.random().toString(36).substring(2, 9);
+            sessionStorage.setItem('chatbot_session_id', sessionId);
+        }
+
+        // Function to add messages to the chat history display
+        function addMessageToChat(sender, message) {
+            const chatHistory = document.getElementById('chat-history');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.textContent = message; // Use textContent for safety
+            chatHistory.appendChild(messageDiv);
+            chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to bottom
+        }
+
+        // Function to send the message
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+
+            if (!message) {
+                return; // Don't send empty messages
+            }
+
+            addMessageToChat('user', message); // Display user's message
+
+            userInput.value = ''; // Clear input field
+            userInput.disabled = true; // Disable input while sending
+            document.querySelector('.input-area button').disabled = true; // Disable send button
+
+            try {
+                const response = await fetch("http://localhost:8000/chat", {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message, session_id: sessionId })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail?.response || `Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                addMessageToChat('bot', data.response); // Display bot's response
+
+            } catch (error) {
+                console.error("Error sending message:", error);
+                addMessageToChat('bot', `Sorry, an error occurred: ${error.message}. Please try again.`);
+            } finally {
+                userInput.disabled = false; // Re-enable input
+                document.querySelector('.input-area button').disabled = false; // Re-enable button
+                userInput.focus(); // Set focus back to input
+            }
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Function to start a new conversation
+        async function startNewConversation() {
+            if (confirm("Are you sure you want to start a new conversation? History will be cleared.")) {
+                try {
+                    const response = await fetch(`http://localhost:8000/reset_chat/${sessionId}`, {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || `Server error: ${response.status}`);
+                    }
+
+                    // Clear session history in sessionStorage and generate a new ID
+                    sessionStorage.removeItem('chatbot_session_id');
+                    sessionId = 'session_' + Date.now() + Math.random().toString(36).substring(2, 9);
+                    sessionStorage.setItem('chatbot_session_id', sessionId);
+
+                    // Clear chat display
+                    document.getElementById('chat-history').innerHTML = '';
+                    addMessageToChat('bot', 'Hello! Starting a new conversation. How can I help you with your shopping?');
+
+                } catch (error) {
+                    console.error("Error resetting conversation:", error);
+                    alert(`Failed to reset conversation: ${error.message}`);
+                }
+            }
+        }
+
+        // Welcome message on first page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.getElementById('chat-history').children.length === 0) {
+                addMessageToChat('bot', 'Hello! How can I assist you with your shopping today?');
+            }
+        });
+    </script>
 </body>
-</html>
+</html> 
