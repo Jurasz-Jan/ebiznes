@@ -1,5 +1,4 @@
 #### Notka
-Z racji dużego obłożenia czasowego na razie są tu wszystkie zrobione zadania, ale brakuje linków do commitów i wszystkich nagranych dem. Bardzo przepraszam i zdaję sobie sprawę,jakie to jest problematyczne. Na dniach te braki będą nadrobione
 Repo jest publiczne z racji, że musi być publiczne, by móc skorzystać z Railwaya
 
 
