@@ -85,3 +85,11 @@ replay_pid*
 **/.vscode/
 **/.idea/
 **/.history/
+
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/venv/
