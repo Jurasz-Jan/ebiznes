@@ -6,8 +6,9 @@ import torch
 import nltk
 from nltk.tokenize import word_tokenize
 from typing import Dict, List, Any
+import random # Importujemy do losowego wyboru otwarć/zamknięć
 
-# Download required NLTK data (only once, on first run)
+# Pobierz wymagane dane NLTK (tylko raz, przy pierwszym uruchomieniu)
 try:
     nltk.data.find('tokenizers/punkt')
 except nltk.downloader.DownloadError:
@@ -34,7 +35,6 @@ class Chatbot:
         print(f"Using device: {'GPU' if self.device == 0 else 'CPU'}")
 
         # === Text Generation Pipeline (DialoGPT-small for English conversations) ===
-        # Changed model to DialoGPT for better conversational quality on CPU
         print("Loading text generation model: microsoft/DialoGPT-small...")
         self.generator = pipeline(
             "text-generation",
@@ -42,13 +42,12 @@ class Chatbot:
             device=self.device,
             do_sample=True,
             temperature=0.7,
-            max_new_tokens=150, # Increased for potentially longer responses
-            no_repeat_ngram_size=3 # Adjusting for DialoGPT
+            max_new_tokens=150,
+            no_repeat_ngram_size=3
         )
         print("Text generation model loaded.")
 
         # === Sentiment Analysis Pipeline (DistilBERT for English) ===
-        # Using a public, efficient English sentiment model
         try:
             print("Loading sentiment analysis model: distilbert-base-uncased-sentiment...")
             self.sentiment_analyzer = pipeline(
@@ -62,7 +61,6 @@ class Chatbot:
             self.sentiment_analyzer = None
 
         # --- Basic dictionaries for topic filtering ---
-        # Keywords adjusted for English context
         self.allowed_categories = {
             "clothes_general": ["clothes", "apparel", "attire", "garment", "fashion", "outfit"],
             "garment_items": ["t-shirt", "pants", "dress", "jacket", "sweater", "hoodie", "skirt", "shoes", "sneakers", "sandals", "scarf", "hat", "socks", "underwear", "coat", "blazer", "tie", "jeans", "leggings", "shorts", "top", "bra", "briefs"],
@@ -70,22 +68,46 @@ class Chatbot:
             "colors_styles": ["color", "style", "trendy", "elegant", "casual", "sporty", "classic", "vintage", "design", "fit", "pattern"],
             "materials": ["cotton", "silk", "linen", "wool", "leather", "polyester", "viscose", "acrylic", "denim", "flannel", "satin", "chiffon"],
             "accessories": ["bag", "purse", "belt", "jewelry", "necklace", "earrings", "bracelet", "watch", "glasses", "wallet", "backpack", "gloves"],
-            "occasions": ["wedding", "party", "prom", "everyday", "work", "special occasion", "sport", "workout"]
+            "occasions": ["wedding", "party", "prom", "everyday", "work", "special occasion", "sport", "workout"],
+            "dialogue_control": ["thank you", "thanks", "goodbye", "bye", "see you", "later", "cheers", "that's all", "enough", "stop"] # New category for farewells
         }
-        # Storing chat history (for simplicity, in memory)
+
+        # --- Conversation Openings and Closings ---
+        self.conversation_openings = [
+            "Hello! How can I help you with your shopping today?",
+            "Hi there! Welcome to our store. What are you looking for?",
+            "Greetings! I'm here to assist you with any questions about our clothes or shopping. How can I help?",
+            "Hey! Glad you're here. How can I assist you with your fashion needs?",
+            "Welcome! Ask me anything about our products or your order. What's on your mind?"
+        ]
+
+        self.conversation_closings = [
+            "You're welcome! Feel free to ask if you need anything else. Have a great day!",
+            "Glad I could assist you! Come back anytime. Goodbye!",
+            "It was a pleasure helping you. Have a wonderful shopping experience!",
+            "Thanks for chatting! Let me know if you have more questions later. Bye for now!",
+            "Alright! If anything else comes up, don't hesitate to reach out. Have a fantastic day!"
+        ]
+
+        # Przechowywanie historii czatu (dla uproszczenia, w pamięci)
         self.chat_histories: Dict[str, List[Dict[str, str]]] = {}
 
     # === Filtering functions ===
     def filter_topic(self, text: str) -> bool:
         """
-        Filters the message for keywords related to store/clothing topics.
-        Uses NLTK tokenization for better precision.
+        Filters the message for keywords related to store/clothing topics, including dialogue control.
         """
-        words = word_tokenize(text.lower(), language='english') # Tokenization for English
+        words = word_tokenize(text.lower(), language='english')
         for category, keywords in self.allowed_categories.items():
             if any(word in words for word in keywords):
                 return True
         return False
+
+    def is_farewell(self, text: str) -> bool:
+        """Checks if the user's message is a farewell."""
+        words = word_tokenize(text.lower(), language='english')
+        farewell_keywords = self.allowed_categories["dialogue_control"]
+        return any(word in words for word in farewell_keywords)
 
     def filter_sentiment(self, text: str) -> bool:
         """
@@ -97,13 +119,8 @@ class Chatbot:
         result = self.sentiment_analyzer(text)[0]
         label = result["label"]
         score = result["score"]
-
-        # NOTE: Labels for 'distilbert-base-uncased-sentiment' are typically:
-        # LABEL_0: Negative
-        # LABEL_1: Positive
         
-        # If sentiment is negative with high probability (e.g., > 90%)
-        if label == "LABEL_0" and score > 0.9: # You can adjust the confidence threshold
+        if label == "NEGATIVE" and score > 0.9:
             print(f"Censoring response due to negative sentiment: {text} (Label: {label}, Score: {score})")
             return False
         return True
@@ -116,9 +133,9 @@ class Chatbot:
         """Adds a message to the chat history."""
         if session_id not in self.chat_histories:
             self.chat_histories[session_id] = []
-        # Limit history to the last few conversations to avoid excessively long prompts
-        # 8 entries = 4 (user, bot) pairs
-        if len(self.chat_histories[session_id]) >= 8:
+        
+        # Limit history to the last few conversations
+        if len(self.chat_histories[session_id]) >= 8: # 4 (user, bot) pairs
             self.chat_histories[session_id] = self.chat_histories[session_id][-8:]
         self.chat_histories[session_id].append({"role": role, "content": content})
 
@@ -128,11 +145,10 @@ class Chatbot:
         current_history = self.get_chat_history(session_id)
 
         # Prompt formatting for conversational models (DialoGPT)
-        # It often works well with simple turn-based prompts
         dialog_prompt = ""
         for entry in current_history:
             dialog_prompt += f"{entry['role']}: {entry['content']}\n"
-        dialog_prompt += "Bot:" # Expecting the bot's response
+        dialog_prompt += "Bot:"
 
         try:
             result_list = self.generator(
@@ -140,16 +156,13 @@ class Chatbot:
                 max_new_tokens=150,
                 do_sample=True,
                 temperature=0.7,
-                no_repeat_ngram_size=3 # Retained for DialoGPT
+                no_repeat_ngram_size=3
             )
             generated_text = result_list[0]["generated_text"].strip()
 
-            # Extract only the bot's response
-            # DialoGPT tends to generate the full conversation history.
-            # We take everything after the last "Bot:"
             answer = generated_text.split("Bot:")[-1].strip()
 
-            # Clean up potential artifacts like extra "User:" or "Bot:"
+            # Clean up potential artifacts
             if "User:" in answer:
                 answer = answer.split("User:")[0].strip()
             if "Bot:" in answer:
@@ -182,11 +195,39 @@ async def chat(request: Request):
     if not message:
         raise HTTPException(status_code=400, detail={"response": "Please provide a message."})
 
-    if not chatbot_instance.filter_topic(message):
-        response_text = "Let's talk about clothes, fashion, or shopping—that's what I can help you with! Feel free to ask about specific products, sizes, delivery, or returns."
+    # Check if it's the first message in the session to provide an opening
+    is_first_message = len(chatbot_instance.get_chat_history(session_id)) == 0
+    if is_first_message:
+        # Provide a random opening if it's the very first message
+        # This will be overridden if the topic is out of scope.
+        initial_response = random.choice(chatbot_instance.conversation_openings)
+        # Add to history to avoid repeating for the same first message
+        chatbot_instance.add_to_chat_history(session_id, "Bot", initial_response)
+        # You might want to return this first, then process the user's actual query
+        # For simplicity, we'll process the query and add the opening to history if relevant
+        # or return it directly if the topic is out of scope.
+
+    # Check for farewell intent
+    if chatbot_instance.is_farewell(message):
+        response_text = random.choice(chatbot_instance.conversation_closings)
         chatbot_instance.add_to_chat_history(session_id, "Bot", response_text)
+        # Immediately return closing and optionally clear history to signify end of conversation
+        del chatbot_instance.chat_histories[session_id] # Clear history for next conversation
         return {"response": response_text}
 
+    # If not a farewell and not an initial greeting, proceed with topic filtering
+    if not chatbot_instance.filter_topic(message):
+        response_text = "I can help you with questions about clothes, fashion, or shopping! Please keep our conversation focused on those topics."
+        # If it's the first message and out of topic, the initial opening is not appropriate.
+        # So we override it with the topic-out-of-scope message.
+        if is_first_message:
+             # Remove the initial opening from history if it was just added and user is off-topic
+             if chatbot_instance.get_chat_history(session_id) and chatbot_instance.get_chat_history(session_id)[-1]["role"] == "Bot":
+                 chatbot_instance.get_chat_history(session_id).pop()
+             chatbot_instance.add_to_chat_history(session_id, "Bot", response_text)
+        return {"response": response_text}
+
+    # If everything is fine, generate a response
     response_text = await chatbot_instance.generate_response(message, session_id)
     return {"response": response_text}
 
