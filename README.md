@@ -1,5 +1,8 @@
+# Jeszcze poprawiam README i dema
+
 #### Notka
 Repo jest publiczne z racji, że musi być publiczne, by móc skorzystać z Railwaya
+
 
 
 ## 1 Docker ✅
@@ -177,6 +180,8 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 ❌ 4.0 Logowanie via Google OAuth2
 ❌ 4.5 Logowanie via Facebook lub Github OAuth2
 ❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
+
+## ✅ Zadania 9,10 – Gotowe, trzeba dodać README i dema
 
 
 
