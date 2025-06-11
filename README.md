@@ -189,21 +189,6 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 ## ✅ Zadanie 9 Chatbot
 
-✅ 3.0 Instancje w chmurze — Railway z Dockerfile
-🌐 Platforma: Railway
-📁 Foldery: backend/ i frontend/ (osobne usługi)
-
-✅ 3.5 Pipeline buildujący aplikację — Dockerfile + autodeploy z GitHub
-📁 Plik: frontend/Dockerfile, backend/Dockerfile
-ℹ️ automatycznie odpala build po git push
-
-✅ 4.0 Notyfikacja mailowa o zbudowaniu aplikacji
-📁 Plik: 10\.github\workflows\deploy.yml
-ℹ️ For now commented out to avoid authentication
- ![alt text](image.png)
-
-✅ 4.5 Deployment aplikacji serwerowej i klienckiej na chmurę
-📁 Railway automatycznie deployuje backend i frontend jako oddzielne Docker services po git push
 
 
 ## ✅ Zadanie 10 Chmura
