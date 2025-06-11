@@ -184,15 +184,13 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 ❌ 4.5 Logowanie via Facebook lub Github OAuth2
 ❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
 
-## ✅ Zadania 9,10 – Gotowe, trzeba dodać README i dema
-
-
 
 📦 Kod: folder 8/project/ (client/, server/)
 
+## ✅ Zadanie 9 Chatbot
 
 ✅ 3.0 Instancje w chmurze — Railway z Dockerfile
-🌐 Platforma: Render.com
+🌐 Platforma: Railway
 📁 Foldery: backend/ i frontend/ (osobne usługi)
 
 ✅ 3.5 Pipeline buildujący aplikację — Dockerfile + autodeploy z GitHub
@@ -204,30 +202,25 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 ℹ️ For now commented out to avoid authentication
  ![alt text](image.png)
 
+✅ 4.5 Deployment aplikacji serwerowej i klienckiej na chmurę
+📁 Railway automatycznie deployuje backend i frontend jako oddzielne Docker services po git push
+
+
+## ✅ Zadanie 10 Chmura
+
+✅ 3.0 Instancje w chmurze — Railway z Dockerfile
+🌐 Platforma: Railway
+📁 Foldery: backend/ i frontend/ (osobne usługi)
+
+✅ 3.5 Pipeline buildujący aplikację — Dockerfile + autodeploy z GitHub
+📁 Plik: frontend/Dockerfile, backend/Dockerfile
+ℹ️ automatycznie odpala build po git push
+
+✅ 4.0 Notyfikacja mailowa o zbudowaniu aplikacji
+📁 Plik: 10\.github\workflows\deploy.yml
+ℹ️ For now commented out to avoid authentication
+ ![alt text](image.png)
 
 ✅ 4.5 Deployment aplikacji serwerowej i klienckiej na chmurę
-📁 Render automatycznie deployuje backend i frontend jako oddzielne Docker services po git push
+📁 Railway automatycznie deployuje backend i frontend jako oddzielne Docker services po git push
 
-
-Zadanie 10 Chmura/CI
-
-Należy wykorzystać GitHub Actions (dopuszczalne są inne rozwiązania
-CI) oraz chmurę Azure (dopuszczalne inne chmury), aby zbudować oraz
-zdeployować aplikację kliencką (frontend) oraz serwerową (backend)
-jako osobne dwie aplikacje. Należy do tego wykorzystać obrazy
-dockerowe, a aplikacje powinny działać na kontenerach. Dopuszczalne
-jest zbudowanie wcześniej aplikacji (jar package) oraz budowanie
-aplikacji via Github Actions. Należy zwrócić uwagę na zasoby dostępne
-na chmurze.
-
-3.0 Należy stworzyć odpowiednie instancje po stronie chmury na
-dockerze
-Demo
-3.5 Stworzyć odpowiedni pipeline w Github Actions do budowania
-aplikacji (np. via fatjar)
-Zbudowane w repo
-4.0 Dodać notyfikację mailową o zbudowaniu aplikacji
-4.5 Dodać krok z deploymentem aplikacji serwerowej oraz klienckiej na
-chmurę
-5.0 Dodać uruchomienie regresyjnych testów automatycznych
-(funkcjonalnych) jako krok w Actions
