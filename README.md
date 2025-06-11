@@ -188,8 +188,19 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 📦 Kod: folder 8/project/ (client/, server/)
 
 ## ✅ Zadanie 9 Chatbot
+# ✅ Zadanie 9 – ChatGPT bot
 
+✅ 3.0 Serwis backendowy – FastAPI + GPT‑2  
+📁 Plik: `chatbot_main_singlefile.py`
 
+✅ 3.5 Interfejs frontowy – HTML + JS  
+📁 Plik: `frontend/index.html`
+
+✅ 4.0 Lista 5 otwarć i zamknięć rozmowy  
+📁 Plik: `chatbot_main_singlefile.py` linia 76
+
+✅ 4.5 Filtrowanie tematów – tylko ubrania/sklep  
+📁 Plik: `chatbot_main_singlefile.py` linia 64
 
 ## ✅ Zadanie 10 Chmura
 
