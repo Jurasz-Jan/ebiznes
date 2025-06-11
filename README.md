@@ -1,8 +1,5 @@
-# Jeszcze poprawiam README i dema
-
 #### Notka
 Repo jest publiczne z racji, że musi być publiczne, by móc skorzystać z Railwaya
-
 
 
 ## 1 Docker ✅
