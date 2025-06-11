@@ -180,3 +180,42 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 
 📦 Kod: folder 8/project/ (client/, server/)
+
+
+✅ 3.0 Instancje w chmurze — Railway z Dockerfile
+🌐 Platforma: Render.com
+📁 Foldery: backend/ i frontend/ (osobne usługi)
+
+✅ 3.5 Pipeline buildujący aplikację — Dockerfile + autodeploy z GitHub
+📁 Plik: frontend/Dockerfile, backend/Dockerfile
+ℹ️ automatycznie odpala build po git push
+
+✅ 4.0 Notyfikacja mailowa o zbudowaniu aplikacji
+ 📁 Plik: 10\.github\workflows\deploy.yml
+
+✅ 4.5 Deployment aplikacji serwerowej i klienckiej na chmurę
+📁 Render automatycznie deployuje backend i frontend jako oddzielne Docker services po git push
+
+
+Zadanie 10 Chmura/CI
+
+Należy wykorzystać GitHub Actions (dopuszczalne są inne rozwiązania
+CI) oraz chmurę Azure (dopuszczalne inne chmury), aby zbudować oraz
+zdeployować aplikację kliencką (frontend) oraz serwerową (backend)
+jako osobne dwie aplikacje. Należy do tego wykorzystać obrazy
+dockerowe, a aplikacje powinny działać na kontenerach. Dopuszczalne
+jest zbudowanie wcześniej aplikacji (jar package) oraz budowanie
+aplikacji via Github Actions. Należy zwrócić uwagę na zasoby dostępne
+na chmurze.
+
+3.0 Należy stworzyć odpowiednie instancje po stronie chmury na
+dockerze
+Demo
+3.5 Stworzyć odpowiedni pipeline w Github Actions do budowania
+aplikacji (np. via fatjar)
+Zbudowane w repo
+4.0 Dodać notyfikację mailową o zbudowaniu aplikacji
+4.5 Dodać krok z deploymentem aplikacji serwerowej oraz klienckiej na
+chmurę
+5.0 Dodać uruchomienie regresyjnych testów automatycznych
+(funkcjonalnych) jako krok w Actions
