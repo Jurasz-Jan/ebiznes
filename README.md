@@ -197,7 +197,10 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 ℹ️ automatycznie odpala build po git push
 
 ✅ 4.0 Notyfikacja mailowa o zbudowaniu aplikacji
- 📁 Plik: 10\.github\workflows\deploy.yml
+📁 Plik: 10\.github\workflows\deploy.yml
+ℹ️ For now commented out to avoid authentication
+ ![alt text](image.png)
+
 
 ✅ 4.5 Deployment aplikacji serwerowej i klienckiej na chmurę
 📁 Render automatycznie deployuje backend i frontend jako oddzielne Docker services po git push
