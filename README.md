@@ -1,7 +1,11 @@
-#### Notka
-Z racji dużego obłożenia czasowego na razie są tu wszystkie zrobione zadania, ale brakuje linków do commitów i wszystkich nagranych dem. Bardzo przepraszam i zdaję sobie sprawę,jakie to jest problematyczne. Na dniach te braki będą nadrobione
+# Jeszcze poprawiam README i dema
 
-# 1 Docker ✅
+#### Notka
+Repo jest publiczne z racji, że musi być publiczne, by móc skorzystać z Railwaya
+
+
+
+## 1 Docker ✅
 3.0 obraz ubuntu z Pythonem w wersji 3.10 ✅
 3.5 obraz ubuntu:24.02 z Javą w wersji 8 oraz Kotlinem ✅
 4.0 do powyższego należy dodać najnowszego Gradle’a oraz paczkę JDBC 
@@ -12,7 +16,7 @@ przez CMD oraz gradle ✅
 
 📦 Kod: folder 1/
 
-# 2 Scala ✅ 
+## 2 Scala ✅ 
 ✅ Zadanie 2 – Play Framework Scala 3 CRUD + Docker
 
 ✅ 3.0 Kontroler CRUD dla Produktów
@@ -41,7 +45,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 📦 Kod: folder 2/
 
-# ✅ Zadanie 3 – Ktor + Discord Bot (Kotlin)
+## ✅ Zadanie 3 – Ktor + Discord Bot (Kotlin)
 
 ✅ 3.0 Aplikacja kliencka w Kotlinie z frameworkiem Ktor
 👉 Link do commita 1
@@ -67,7 +71,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 
 
-# ✅ Zadanie 4 – Echo + GORM (Go)
+## ✅ Zadanie 4 – Echo + GORM (Go)
 
 ✅ 3.0 Aplikacja we frameworku Echo w Go + kontroler Produktów z CRUD
 👉 Link do commita 1
@@ -92,7 +96,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 📦 Kod: folder 4/
 
 
-# ✅ Zadanie 5 – Wzorce behawioralne React + Docker
+## ✅ Zadanie 5 – Wzorce behawioralne React + Docker
 
 ✅ 3.0 Komponenty: Produkty i Płatności + komunikacja z backendem
 👉 Link do commita 1
@@ -116,7 +120,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 📦 Kod: folder 5/
 
-# ✅ Zadanie 6 – Testy automatyczne CypressJS
+## ✅ Zadanie 6 – Testy automatyczne CypressJS
 ✅ 3.0 20 przypadków testowych
 👉 Link do commita 1
 📁 Plik: cypress/e2e/todos.cy.js
@@ -139,7 +143,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 📦 Kod: folder 6/
 
-# ✅ Zadanie 7 – SonarCloud: Jakość i bezpieczeństwo
+## ✅ Zadanie 7 – SonarCloud: Jakość i bezpieczeństwo
 ✅ 3.0 Dodanie litera (SonarScan) do hooków gita (pre-push)
 👉 Link do commita 1
 📁 Plik: .husky/pre-push, server/sonar-project.properties
@@ -164,7 +168,7 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 
 
-# ✅ Zadanie 8 – Autoryzacja i OAuth2
+## ✅ Zadanie 8 – Autoryzacja i OAuth2
 ✅ 3.0 Logowanie przez aplikację serwerową (bez OAuth2)
 👉 Link do commita 1
 📁 Plik: server/index.js
@@ -176,6 +180,8 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 ❌ 4.0 Logowanie via Google OAuth2
 ❌ 4.5 Logowanie via Facebook lub Github OAuth2
 ❌ 5.0 Zapisywanie danych logowania OAuth2 po stronie serwera
+
+## ✅ Zadania 9,10 – Gotowe, trzeba dodać README i dema
 
 
 
