@@ -187,7 +187,6 @@ Koszyk: app/controllers/CartController.scala, app/models/Cart.scala
 
 📦 Kod: folder 8/project/ (client/, server/)
 
-## ✅ Zadanie 9 Chatbot
 # ✅ Zadanie 9 – ChatGPT bot
 
 ✅ 3.0 Serwis backendowy – FastAPI + GPT‑2  
